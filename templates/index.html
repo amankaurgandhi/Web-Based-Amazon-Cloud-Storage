@@ -1,0 +1,41 @@
+
+<html>
+
+  <head>
+    <title>CSE6331 </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/stylesheets/style.css">
+  </head>
+
+  <body>
+   <title>Upload new File</title>
+    <h1>Upload new File</h1>
+	<form method=post enctype=multipart/form-data action = "{{url_for('uploadfile')}}">
+      <p><input type=file name=file>
+         <input type=submit value=Upload>
+    </form>
+
+<h1>List Files</h1>
+ <form method=get enctype=multipart/form-data action = "{{url_for('listfiles')}}">
+    
+         <input type=submit name="List" value = "List">
+    </form>
+    <table>
+      {% for key in result %}
+            <tr>
+               <th> {{ key.key}} </th>
+                <td><form name="f1" action="{{url_for('delete', filename = key.key )}}" >
+                <input id="'delete-' + $index" type="submit" name="Delete" value="Delete">
+               </form></td>
+               <td><form name="f2" action="{{url_for('download', filename = key.key)}}" >
+                <input id="'download-' + $index" type="submit" name="Download" value="Download">
+               </form> </td>
+            </tr>
+            
+         {% endfor %}
+    </table>
+  </body>
+
+</html>
